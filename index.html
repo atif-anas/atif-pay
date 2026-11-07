@@ -1,3 +1,132 @@
-<h1>Atif Pay</h1>
-<p>Welcome to my website</p>
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atif Pay | الجنيه السوداني</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0f0a">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0a0f0a;color:#fff;font-family:sans-serif;padding-bottom:30px}
+.top{background:linear-gradient(135deg,#00c853,#003300);padding:22px 18px 55px;border-radius:0 0 30px 30px;text-align:center}
+.top h1{margin:0;font-size:26px;color:#FFD700}
+.top p{margin:5px 0 0;color:#d8ffd8;font-size:13px}
+.card{background:#151515;border:1px solid #2a2a2a;border-radius:22px;margin:-35px 14px 14px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.card2{background:#151515;border:1px solid #2a2a2a;border-radius:22px;margin:14px;padding:18px}
+.label{color:#aaa;font-size:13px}
+.big{font-size:34px;font-weight:bold;color:#FFD700;margin:5px 0}
+.small{color:#00e676;font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px}
+.mini{background:#1f1f1f;border-radius:18px;padding:14px;text-align:center;border:1px solid #2c2c2c}
+.mini b{font-size:18px}
+.mini span{color:#FFD700;font-weight:bold;display:block;margin-top:6px;font-size:16px}
+.mini small{color:#888}
+input,select{width:100%;padding:15px;border-radius:14px;border:none;font-size:17px;margin:8px 0;text-align:center;background:#fff;color:#000}
+button{width:100%;padding:16px;border:none;border-radius:14px;font-size:19px;font-weight:bold;cursor:pointer}
+.btn-green{background:#00c853;color:#fff}
+.btn-gold{background:#FFD700;color:#000;margin-top:10px}
+.btn-whats{background:#25D366;color:#fff;margin-top:10px}
+#result{background:#0a2a12;border:1px solid #00c853;border-radius:14px;padding:14px;font-size:20px;color:#FFD700;font-weight:bold;margin-top:10px;display:none}
+table{width:100%;border-collapse:collapse}
+th{color:#FFD700;font-size:13px;padding:10px 4px;text-align:center}
+td{padding:12px 4px;border-top:1px solid #2a2a2a;text-align:center;font-size:15px}
+.footer{text-align:center;color:#777;font-size:12px;margin-top:15px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<div class="top">
+<h1>💰 Atif Pay</h1>
+<p>الجنيه السوداني • أسعار اليوم • الخرطوم</p>
+<p id="updateTime">جاري تحديث الأسعار...</p>
+</div>
+
+<div class="card">
+<div class="label">سعر الدولار اليوم - شراء</div>
+<div class="big" id="usdBig">... ج.س</div>
+<div class="small">▲ محدث الآن • السوق الموازي</div>
+</div>
+
+<div class="grid" id="miniGrid"></div>
+
+<div class="card2">
+<h3 style="margin:0 0 5px">🔄 حول قروشك</h3>
+<select id="currency">
+<option value="USD">🇺🇸 دولار أمريكي USD</option>
+<option value="EUR">🇪🇺 يورو EUR</option>
+<option value="SAR">🇸🇦 ريال سعودي SAR</option>
+<option value="AED">🇦🇪 درهم إماراتي AED</option>
+<option value="EGP">🇪🇬 جنيه مصري EGP</option>
+<option value="GBP">🇬🇧 جنيه إسترليني GBP</option>
+<option value="KWD">🇰🇼 دينار كويتي KWD</option>
+<option value="QAR">🇶🇦 ريال قطري QAR</option>
+</select>
+<input type="number" id="amount" placeholder="اكتب المبلغ - مثال 1000">
+<button class="btn-green" onclick="calc()">احسب بالجنيه السوداني</button>
+<div id="result"></div>
+</div>
+
+<div class="card2">
+<h3 style="margin:0">📊 أسعار اليوم كاملة</h3>
+<table>
+<tr><th>العملة</th><th>شراء</th><th>بيع</th></tr>
+<tbody id="pricesTable"></tbody>
+</table>
+</div>
+
+<div class="card2" style="text-align:center">
+<h3 style="margin:0">📱 ثبت التطبيق</h3>
+<p style="color:#aaa;font-size:13px">ثبت Atif Pay في تلفونك زي بنكك، وافتحو بدون نت</p>
+<button id="installBtn" class="btn-gold">📱 ثبت التطبيق في تلفونك</button>
+<button class="btn-whats" onclick="window.open('https://wa.me/249117285743?text=السلام عليكم، عايز استفسر عن سعر الدولار اليوم في Atif Pay','_blank')">💬 تواصل واتساب - 0117285743</button>
+</div>
+
+<p class="footer">Atif Pay © 2026<br>الأسعار استرشادية من السوق الموازي<br>تتغير خلال اليوم</p>
+
+<script>
+let rates={
+USD:{buy:10300,sell:10500,name:"دولار",flag:"🇺🇸"},
+EUR:{buy:11800,sell:12050,name:"يورو",flag:"🇪🇺"},
+SAR:{buy:2730,sell:2800,name:"ريال سعودي",flag:"🇸🇦"},
+AED:{buy:2800,sell:2860,name:"درهم",flag:"🇦🇪"},
+EGP:{buy:185,sell:191,name:"جنيه مصري",flag:"🇪🇬"},
+GBP:{buy:13800,sell:14100,name:"إسترليني",flag:"🇬🇧"},
+KWD:{buy:33500,sell:34200,name:"دينار كويتي",flag:"🇰🇼"},
+QAR:{buy:2820,sell:2890,name:"ريال قطري",flag:"🇶🇦"}
+};
+function render(){
+document.getElementById('usdBig').innerText = rates.USD.buy.toLocaleString() + ' ج.س';
+let mini="";
+for(let c of ["SAR","AED","EUR","EGP"]){
+mini+=`<div class="mini">${rates[c].flag} <b>${rates[c].name}</b><span>${rates[c].buy.toLocaleString()}</span><small>جنيه سوداني</small></div>`;
+}
+document.getElementById('miniGrid').innerHTML=mini;
+let h="";
+for(let c in rates){
+h+=`<tr><td>${rates[c].flag} ${rates[c].name}</td><td>${rates[c].buy.toLocaleString()}</td><td>${rates[c].sell.toLocaleString()}</td></tr>`;
+}
+document.getElementById('pricesTable').innerHTML=h;
+document.getElementById('updateTime').innerText = "آخر تحديث: " + new Date().toLocaleString('ar-SD');
+}
+function calc(){
+let code=document.getElementById('currency').value;
+let amt=parseFloat(document.getElementById('amount').value);
+if(!amt) return;
+let r=rates[code];
+let el=document.getElementById('result');
+el.style.display='block';
+el.innerHTML = amt.toLocaleString() + " " + r.name + " = <br>" + (amt*r.buy).toLocaleString() + " جنيه سوداني";
+}
+render();
+let deferredPrompt;
+let btn=document.getElementById('installBtn');
+window.addEventListener('beforeinstallprompt', (e)=>{e.preventDefault();deferredPrompt=e;});
+btn.addEventListener('click', async ()=>{
+if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;}
+else {alert("دوس التلاتة نقاط فوق في كروم واختار 'إضافة إلى الشاشة الرئيسية'");}
+});
+</script>
+</body>
+</html>
