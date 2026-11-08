@@ -1,13 +1,14 @@
 {
-  "name": "Atif Pay - الجنيه السوداني",
-  "short_name": "Atif Pay",
-  "start_url": ".",
+  "name": "منصة الأستاذ بدر",
+  "short_name": "الأستاذ بدر",
+  "start_url": "./bader.html",
   "display": "standalone",
-  "background_color": "#0a0f0a",
-  "theme_color": "#00c853",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "description": "منصة الأستاذ بدر - صدقة جارية",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/3135/3135755.png",
       "sizes": "512x512",
       "type": "image/png"
     }

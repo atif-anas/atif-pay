@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة الأستاذ بدر</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f172a">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#0f172a;color:#fff}
+header{padding:14px;display:flex;justify-content:space-between;align-items:center;background:#1e293b;position:sticky;top:0}
+header b{font-size:18px}header b span{color:#facc15}
+#installBtn{background:#facc15;color:#000;border:0;padding:9px 14px;border-radius:999px;font-weight:800}
+.hero{text-align:center;padding:28px 16px}.hero h1{font-size:26px}.hero p{color:#cbd5e1;line-height:1.7}
+.card{background:#1e293b;margin:12px 16px;padding:16px;border-radius:16px}
+.btn{display:block;text-align:center;background:#facc15;color:#000;padding:12px;border-radius:12px;font-weight:800;text-decoration:none;margin-top:10px}
+.btn2{background:#fff}input{width:100%;padding:12px;border-radius:10px;border:0;margin:6px 0;text-align:center;font-size:16px}
+.dua{text-align:center;background:#fef3c7;color:#000;margin:12px 16px;padding:16px;border-radius:16px;line-height:1.7}
+footer{text-align:center;color:#94a3b8;font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<header><b>الأستاذ <span>بدر</span> 🎓</b><button id="installBtn">📲 حمّل التطبيق الآن</button></header>
+<div class="hero"><h1>منصة الأستاذ بدر</h1><p>صدقة جارية على روح معلم الكيمياء<br>اللهم اجعل علمه نوراً له في قبره 🤲</p></div>
+<div class="card"><h3>🧪 الكيمياء - الملف المفصل</h3><p>شرح كامل لكل أبواب الكيمياء للشهادة السودانية</p><a class="btn" href="chemistry-full.html">افتح الملف المفصل</a></div>
+<div class="card"><h3>⚡ الكيمياء - نقاط مهمة</h3><p>مراجعة سريعة قبل الامتحان</p><a class="btn btn2" href="chemistry-points.html">افتح النقاط المهمة</a></div>
+<div class="card"><h3>🧮 حاسبة النسبة</h3><input id="perc" type="number" placeholder="اكتب نسبتك مثلاً 85"><button class="btn" onclick="calc()">احسب</button><p id="res" style="text-align:center;font-weight:800"></p></div>
+<div class="dua"><b>🤲 ادعُ للأستاذ بدر</b><p>اللهم ارحم الأستاذ بدر واغفر له، واجعل قبره روضة من رياض الجنة، واجعل ما علّمه لنا صدقة جارية له.</p><button class="btn" onclick="alert('تقبل الله دعاءك 🤲')">ادعُ له الآن</button></div>
+<footer>منصة الأستاذ بدر - صدقة جارية - 2026</footer>
+<script>
+function calc(){let v=document.getElementById('perc').value;if(!v)return document.getElementById('res').innerText='اكتب نسبتك أولاً';document.getElementById('res').innerText='نسبتك هي: '+v+'% - بالتوفيق ❤️';}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+let deferredPrompt;const installBtn=document.getElementById('installBtn');
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+installBtn.addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;}else{alert('دوس النقاط الثلاثة فوق واختار إضافة إلى الشاشة الرئيسية');}});
+</script>
+</body>
+</html>
